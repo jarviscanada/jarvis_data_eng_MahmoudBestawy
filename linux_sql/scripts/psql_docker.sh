@@ -57,15 +57,17 @@ case $cmd in
 
 start|stop)
   # Check instance status; exit 1 if container has not been created
-  if [ $container_status # ... todo
-  # ... todo
+  if [ $container_status -ne 0 ]; then
+    echo 'Container has not been created'
+    exit 1
+  fi
 
   # Start or stop the container
 	docker container $cmd jrvs-psql
 	exit $?
 	;;
 
-  *)
+*)
 	echo 'Illegal command'
 	echo 'Commands: start|stop|create'
 	exit 1
